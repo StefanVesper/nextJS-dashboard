@@ -11,9 +11,7 @@ import { formatCurrency } from './utils';
 
 export async function fetchRevenue() {
   try {
-    
     const data = await sql<Revenue>`SELECT * FROM revenue`;
-
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -29,7 +27,7 @@ export async function fetchLatestInvoices() {
       JOIN customers ON invoices.customer_id = customers.id
       ORDER BY invoices.date DESC
       LIMIT 5`;
-
+console.log(data);
     const latestInvoices = data.rows.map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
